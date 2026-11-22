@@ -46,7 +46,7 @@ section{padding:88px 0 0}
 .card{position:relative;border-radius:24px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:20px;color:#fff;box-shadow:0 10px 30px rgba(33,20,48,.12);transition:transform .2s}
 .card:hover{transform:translateY(-4px)}
 .card.v{aspect-ratio:9/14}.card.i{aspect-ratio:1/1}
-.card.hide{display:none}
+.card.hide{display:none}.card{text-decoration:none}.card .sh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(33,20,48,0) 45%,rgba(33,20,48,.85))}
 .card video,.card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .card b{position:relative;font-size:19px;line-height:1.3}
 .card small{position:relative;font-weight:600;opacity:.85}
@@ -83,24 +83,23 @@ footer{background:var(--plum);color:#cdbfe0;text-align:center;padding:26px;font-
 <div class="contact" id="contact"><h2>تابعيني وتواصلي</h2><p>Arwa AI على تيك توك وفيسبوك</p><a class="fb" href="https://www.tiktok.com/@arwa_8ai" target="_blank" rel="noopener">TikTok @arwa_8ai</a> <a class="fb" id="fb" href="#" target="_blank" rel="noopener">Facebook · Arwa AI</a><!-- TODO: حطي لينك صفحة الفيسبوك في href اللي فوق --></div>
 </div><footer>© Arwa Ahmed</footer></div>
 
+<script src="works1.js"></script><script src="works2.js"></script>
 <script>
 /* أضيفي شغلك هنا. لكل عنصر: type = video أو image، cat = fashion أو products أو content،
    title = الاسم، src = مسار الملف (مثلا "v1.mp4" أو "p1.jpg"). لو src فاضي بيظهر كارت PLACEHOLDER. */
 const CATS=[["all","الكل"],["fashion","فاشون ولبس"],["products","منتجات وإعلانات"],["content","صناعة محتوى"],["education","تعليمي"],["comedy","كوميدي"],["stories","قصص وأنيميشن"],["news","أخبار AI"]];
 const COL={fashion:["#e58fbd","#f6c3b0"],products:["#8559ae","#b48ad6"],content:["#c9a3e6","#e8c9ef"],education:["#6d4a9a","#9b7cc4"],comedy:["#f6c3b0","#f2dca8"],stories:["#d985b8","#9b6bc4"],news:["#a58ad0","#cfc0ea"]};
-const WORKS=[];
-CATS.slice(1).forEach(([k,l])=>{WORKS.push({type:"video",cat:k,title:l+" (فيديو)",src:""});WORKS.push({type:"image",cat:k,title:l+" (صورة)",src:""})});
+const WORKS=[].concat(window.W1||[],window.W2||[]);
+
 const LAB=Object.fromEntries(CATS.slice(1));
 ["video","image"].forEach(t=>{
  const key=t+"s",grid=document.getElementById(key+"-grid"),tabs=document.querySelector('[data-t="'+key+'"]');
  WORKS.filter(w=>w.type===t).forEach(w=>{
-  const c=document.createElement("div");c.className="card "+(t==="video"?"v":"i");c.dataset.c=w.cat;
-  c.style.background="linear-gradient(160deg,"+COL[w.cat][0]+","+COL[w.cat][1]+")";
-  let h="";
-  if(w.src){h+=t==="video"?'<video src="'+w.src+'" controls playsinline preload="metadata"></video>':'<img src="'+w.src+'" alt="'+w.title+'" loading="lazy">'}
-  else{h+='<span class="ph">PLACEHOLDER</span>'+(t==="video"?'<span class="play">▶</span>':'')}
+  const c=document.createElement("a");c.href=w.url;c.target="_blank";c.rel="noopener";c.className="card "+(t==="video"?"v":"i");c.dataset.c=w.cat;
+  c.style.background="#211430";
+  let h='<img src="'+w.img+'" alt="'+w.title+'" loading="lazy"><i class="sh"></i>'+(t==="video"?'<span class="play">▶</span>':'');
   h+='<b>'+w.title+'</b><small>'+LAB[w.cat]+'</small>';c.innerHTML=h;grid.appendChild(c)});
- CATS.forEach(([k,l],i)=>{const b=document.createElement("button");b.className="tab"+(i?"":" on");b.textContent=l;
+ CATS.filter(([k])=>k==='all'||WORKS.some(w=>w.type===t&&w.cat===k)).forEach(([k,l],i)=>{const b=document.createElement("button");b.className="tab"+(i?"":" on");b.textContent=l;
   b.onclick=()=>{tabs.querySelectorAll(".tab").forEach(x=>x.classList.remove("on"));b.classList.add("on");
    grid.querySelectorAll(".card").forEach(c=>c.classList.toggle("hide",k!=="all"&&c.dataset.c!==k))};tabs.appendChild(b)});
 });
