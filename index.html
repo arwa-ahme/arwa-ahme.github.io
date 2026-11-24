@@ -115,11 +115,15 @@ if(!rm&&innerWidth>900){addEventListener("scroll",()=>{if(tk)return;tk=true;requ
  const art=document.querySelector(".art .bust"),pan=document.querySelector(".panel");pan.addEventListener("pointermove",e=>{const r=pan.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;art.style.translate=(x*-18)+"px "+(y*-10)+"px"})}
 })();</script>
 <div class="vmodal" id="vmodal"><div class="vbox"><button class="vclose" id="vclose" aria-label="close">✕</button><div class="vframe-wrap"><div class="vspin">LOADING…</div><iframe id="vframe" allow="autoplay; fullscreen; encrypted-media" allowfullscreen title="video"></iframe></div><div class="vtitle" id="vtitle"></div></div></div>
+<div class="vmodal" id="imodal"><div class="vbox"><button class="vclose" id="iclose" aria-label="close">✕</button><div class="vframe-wrap" style="aspect-ratio:auto;max-height:82vh;display:flex;background:#111"><img id="iimg" alt="" style="width:100%;height:100%;max-height:82vh;object-fit:contain;display:block"></div></div></div>
 <script>
 (function(){var m=document.getElementById("vmodal"),f=document.getElementById("vframe"),t=document.getElementById("vtitle"),x=document.getElementById("vclose");
 function openV(u,title){var s=m.querySelector(".vspin");if(s)s.style.display="flex";f.src=u;t.textContent=title||"";m.classList.add("on");document.body.style.overflow="hidden"}
 function closeV(){m.classList.remove("on");f.src="";document.body.style.overflow=""}
-document.querySelectorAll(".vcard").forEach(function(c){c.addEventListener("click",function(e){e.preventDefault();var b=c.querySelector(".tx b");openV(c.href,b?b.textContent:"")})});document.querySelectorAll(".card:not(.vcard)").forEach(function(c){c.addEventListener("click",function(e){if(c.getAttribute("href")==="#")e.preventDefault()})});
+document.querySelectorAll(".vcard").forEach(function(c){c.addEventListener("click",function(e){e.preventDefault();var b=c.querySelector(".tx b");openV(c.href,b?b.textContent:"")})});var im=document.getElementById("imodal"),ii=document.getElementById("iimg"),ix=document.getElementById("iclose");
+document.querySelectorAll(".card:not(.vcard)").forEach(function(c){c.addEventListener("click",function(e){e.preventDefault();var g=c.querySelector("img");if(!g)return;ii.src=g.src;im.classList.add("on");document.body.style.overflow="hidden"})});
+function closeI(){im.classList.remove("on");ii.src="";document.body.style.overflow=""}
+ix.addEventListener("click",closeI);im.addEventListener("click",function(e){if(e.target===im)closeI()});addEventListener("keydown",function(e){if(e.key==="Escape")closeI()});
 x.addEventListener("click",closeV);
 m.addEventListener("click",function(e){if(e.target===m)closeV()});
 addEventListener("keydown",function(e){if(e.key==="Escape")closeV()});
