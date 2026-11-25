@@ -87,7 +87,38 @@ html,body{overflow-x:clip}
 .vspin{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-family:Anton;font-size:22px;letter-spacing:2px;animation:vp 1.2s ease-in-out infinite}
 @keyframes vp{50%{opacity:.35}}
 @media(max-width:900px){.vbox{width:min(94vw,380px)}}
-</style></head><body id="top"><svg width="0" height="0" style="position:absolute"><defs><clipPath id="hc"><ellipse cx="200" cy="200" rx="118" ry="145"/></clipPath>
+
+/* ---- THWIP comic opener ---- */
+#thwip{position:fixed;inset:0;z-index:1000;direction:ltr;overflow:hidden}
+#thwip .half{position:absolute;top:-2%;bottom:-2%;width:52.5%;background:#d9202a radial-gradient(rgba(0,0,0,.3) 2px,transparent 2.6px) 0 0/14px 14px;transition:transform .65s cubic-bezier(.75,0,.2,1)}
+#thwip .hl{left:-1.5%;border-right:7px solid #0a0b1e}
+#thwip .hr{right:-1.5%;background-color:#1b2a8c;border-left:7px solid #0a0b1e}
+#thwip.open .hl{transform:translateX(-112%) rotate(-5deg)}
+#thwip.open .hr{transform:translateX(112%) rotate(5deg)}
+#thwip .web{position:absolute;left:50%;top:50%;width:76vmin;height:76vmin;transform:translate(-50%,-50%);animation:twweb .5s .1s ease-out both}
+#thwip .web path,#thwip .web circle,#twfx .web path,#twfx .web circle{stroke:#fff;fill:none;stroke-width:2.5;opacity:.9}
+@keyframes twweb{from{opacity:0;transform:translate(-50%,-50%) scale(.55) rotate(-20deg)}to{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0)}}
+.burst{position:absolute;left:50%;top:50%;width:54vmin;height:38vmin;display:flex;align-items:center;justify-content:center}
+#thwip .burst{animation:twpop .45s .18s cubic-bezier(.2,1.5,.3,1) both;transform:translate(-50%,-50%)}
+.burst i,.burst b{position:absolute;inset:0;clip-path:polygon(50.0% 14.0%,55.6% 32.5%,71.7% 17.6%,61.8% 39.3%,89.1% 27.6%,72.5% 42.2%,98.7% 42.0%,69.0% 50.0%,98.7% 58.0%,72.5% 57.8%,89.1% 72.4%,61.8% 60.7%,71.7% 82.4%,55.6% 67.5%,50.0% 86.0%,45.8% 63.3%,28.3% 82.4%,34.4% 64.1%,10.9% 72.4%,32.9% 55.9%,1.3% 58.0%,25.0% 50.0%,1.3% 42.0%,32.9% 44.1%,10.9% 27.6%,34.4% 35.9%,28.3% 17.6%,45.8% 36.7%)}
+.burst i{background:#0a0b1e;transform:scale(1.12) rotate(-8deg)}
+.burst b{background:#ffd400;transform:rotate(-8deg)}
+.burst span{position:relative;z-index:1;font-family:Anton,Impact,sans-serif;font-size:10vmin;color:#d9202a;-webkit-text-stroke:2.5px #0a0b1e;text-shadow:5px 5px 0 #0a0b1e;transform:rotate(-8deg);white-space:nowrap}
+@keyframes twpop{0%{opacity:0;transform:translate(-50%,-50%) scale(0) rotate(-30deg)}60%{opacity:1;transform:translate(-50%,-50%) scale(1.14) rotate(3deg)}100%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0)}}
+#thwip.open .burst{transition:all .5s ease-in;transform:translate(-50%,-50%) scale(2.6)!important;opacity:0}
+#thwip.open .web{transition:opacity .35s;opacity:0!important}
+#thwip.open .skip{opacity:0!important;transition:opacity .2s}
+#thwip .skip{position:absolute;bottom:26px;left:0;right:0;text-align:center;font-family:Cairo,sans-serif;font-size:14px;color:#fff;opacity:0;animation:twskip .4s .9s ease-out both}
+@keyframes twskip{to{opacity:.75}}
+#twfx{position:fixed;inset:0;z-index:1001;direction:ltr;overflow:hidden;pointer-events:none}
+#twfx .flash{position:absolute;inset:0;background:#fff;animation:twflash .5s ease-out both}
+@keyframes twflash{0%{opacity:.95}100%{opacity:0}}
+#twfx .web{position:absolute;left:50%;top:50%;width:60vmin;height:60vmin;transform:translate(-50%,-50%);animation:twweb .35s ease-out both,twout .3s .45s ease-in both}
+#twfx .burst{width:42vmin;height:30vmin;animation:twpop .35s .05s cubic-bezier(.2,1.5,.3,1) both,twout .3s .45s ease-in both;transform:translate(-50%,-50%)}
+#twfx .burst span{font-size:8vmin}
+@keyframes twout{to{opacity:0;transform:translate(-50%,-50%) scale(1.7)}}
+@media(max-width:900px){.burst span{font-size:13vmin}#twfx .burst span{font-size:11vmin}}
+</style></head><body id="top"><div id="thwip" aria-hidden="true"><div class="half hl"></div><div class="half hr"></div><svg class="web" viewBox="0 0 300 300"><path d="M150 150L300 150M150 150L256 256M150 150L150 300M150 150L44 256M150 150L0 150M150 150L44 44M150 150L150 0M150 150L256 44M150 150L212 44M150 150L256 106M150 150L256 194M150 150L212 256M150 150L106 256M150 150L44 194M150 150L44 106M150 150L88 44"/><circle cx="150" cy="150" r="34"/><circle cx="150" cy="150" r="72"/><circle cx="150" cy="150" r="112"/></svg><div class="burst"><i></i><b></b><span>THWIP!</span></div><div class="skip">دوسي في أي حتة للتخطي</div></div><svg width="0" height="0" style="position:absolute"><defs><clipPath id="hc"><ellipse cx="200" cy="200" rx="118" ry="145"/></clipPath>
 <symbol id="mask" viewBox="40 40 320 340"><ellipse cx="200" cy="200" rx="118" ry="145" fill="#d9202a"/><g clip-path="url(#hc)" fill="none" stroke="#5a0a10" stroke-width="2.2" opacity=".85"><path d="M200 200L370 200M200 200L358 264M200 200L322 318M200 200L269 355M200 200L206 370M200 200L142 360M200 200L86 326M200 200L47 275M200 200L30 212M200 200L38 147M200 200L70 91M200 200L120 50M200 200L182 31M200 200L247 37M200 200L305 66M200 200L347 115M200 200L368 176"/><ellipse cx="200" cy="200" rx="30" ry="36"/><ellipse cx="200" cy="200" rx="62" ry="74"/><ellipse cx="200" cy="200" rx="95" ry="114"/><ellipse cx="200" cy="200" rx="128" ry="153"/></g><ellipse cx="200" cy="200" rx="118" ry="145" fill="none" stroke="#2a0508" stroke-width="5"/>
 <path d="M82 190Q112 150 192 222Q160 262 112 238Q88 222 82 190Z" fill="#fff" stroke="#111" stroke-width="7" stroke-linejoin="round"/><path d="M318 190Q288 150 208 222Q240 262 288 238Q312 222 318 190Z" fill="#fff" stroke="#111" stroke-width="7" stroke-linejoin="round"/></symbol></defs></svg>
 <div class="panel"><svg class="cw" viewBox="0 0 300 300" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.2"><path d="M0 0L300 300M0 60L240 300M0 120L180 300M0 180L120 300M60 0L300 240M120 0L300 180M180 0L300 120"/><path d="M0 40Q40 40 40 0M0 90Q90 90 90 0M0 150Q150 150 150 0M0 220Q220 220 220 0"/></svg>
@@ -114,13 +145,26 @@ const big=[...document.querySelectorAll(".big")];let tk=false;
 if(!rm&&innerWidth>900){addEventListener("scroll",()=>{if(tk)return;tk=true;requestAnimationFrame(()=>{big.forEach(b=>{const r=b.parentElement.getBoundingClientRect();b.style.transform="translateX("+((r.top-innerHeight/2)*.18)+"px)"});tk=false})},{passive:true});
  const art=document.querySelector(".art .bust"),pan=document.querySelector(".panel");pan.addEventListener("pointermove",e=>{const r=pan.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;art.style.translate=(x*-18)+"px "+(y*-10)+"px"})}
 })();</script>
-<div class="vmodal" id="vmodal"><div class="vbox"><button class="vclose" id="vclose" aria-label="close">✕</button><div class="vframe-wrap"><div class="vspin">LOADING…</div><iframe id="vframe" allow="autoplay; fullscreen; encrypted-media" allowfullscreen title="video"></iframe><video id="vplayer" controls playsinline style="display:none;position:absolute;inset:0;width:100%;height:100%;background:#000"></video></div><div class="vtitle" id="vtitle"></div></div></div>
+<script>
+function twfx(cb){if(matchMedia("(prefers-reduced-motion: reduce)").matches){cb();return}
+var d=document.createElement("div");d.id="twfx";d.setAttribute("aria-hidden","true");
+d.innerHTML='<div class="flash"></div><svg class="web" viewBox="0 0 300 300"><path d="M150 150L300 150M150 150L256 256M150 150L150 300M150 150L44 256M150 150L0 150M150 150L44 44M150 150L150 0M150 150L256 44M150 150L212 44M150 150L256 106M150 150L256 194M150 150L212 256M150 150L106 256M150 150L44 194M150 150L44 106M150 150L88 44"/><circle cx="150" cy="150" r="34"/><circle cx="150" cy="150" r="72"/><circle cx="150" cy="150" r="112"/></svg><div class="burst"><i></i><b></b><span>THWIP!</span></div>';
+document.body.appendChild(d);setTimeout(cb,280);setTimeout(function(){d.remove()},820)}
+(function(){var t=document.getElementById("thwip");if(!t)return;
+var skip=false;try{if(sessionStorage.getItem("thwip-seen"))skip=true}catch(e){}
+if(skip||matchMedia("(prefers-reduced-motion: reduce)").matches){t.remove();return}
+try{sessionStorage.setItem("thwip-seen","1")}catch(e){}
+document.body.style.overflow="hidden";var done=false;
+function fin(){if(done)return;done=true;document.body.style.overflow="";t.remove()}
+t.addEventListener("click",function(){t.classList.add("open");setTimeout(fin,680)});
+setTimeout(function(){t.classList.add("open")},1650);setTimeout(fin,2450);})();
+</script><div class="vmodal" id="vmodal"><div class="vbox"><button class="vclose" id="vclose" aria-label="close">✕</button><div class="vframe-wrap"><div class="vspin">LOADING…</div><iframe id="vframe" allow="autoplay; fullscreen; encrypted-media" allowfullscreen title="video"></iframe><video id="vplayer" controls playsinline style="display:none;position:absolute;inset:0;width:100%;height:100%;background:#000"></video></div><div class="vtitle" id="vtitle"></div></div></div>
 <div class="vmodal" id="imodal"><div class="vbox"><button class="vclose" id="iclose" aria-label="close">✕</button><div class="vframe-wrap" style="aspect-ratio:auto;max-height:82vh;display:flex;background:#111"><img id="iimg" alt="" style="width:100%;height:100%;max-height:82vh;object-fit:contain;display:block"></div></div></div>
 <script>
 (function(){var m=document.getElementById("vmodal"),f=document.getElementById("vframe"),p=document.getElementById("vplayer"),t=document.getElementById("vtitle"),x=document.getElementById("vclose");
 function openV(u,title){var s=m.querySelector(".vspin");if(s)s.style.display="flex";if(/\.mp4($|\?)/.test(u)){f.style.display="none";f.src="";p.style.display="block";p.onloadeddata=function(){if(s)s.style.display="none"};p.src=u;p.play().catch(function(){})}else{p.pause();p.removeAttribute("src");p.load();p.style.display="none";f.style.display="block";f.src=u}t.textContent=title||"";m.classList.add("on");document.body.style.overflow="hidden"}
 function closeV(){m.classList.remove("on");f.src="";p.pause();p.removeAttribute("src");p.load();document.body.style.overflow=""}
-document.querySelectorAll(".vcard").forEach(function(c){c.addEventListener("click",function(e){e.preventDefault();var b=c.querySelector(".tx b");openV(c.href,b?b.textContent:"")})});var im=document.getElementById("imodal"),ii=document.getElementById("iimg"),ix=document.getElementById("iclose");
+document.querySelectorAll(".vcard").forEach(function(c){c.addEventListener("click",function(e){e.preventDefault();var b=c.querySelector(".tx b");twfx(function(){openV(c.href,b?b.textContent:"")})})});var im=document.getElementById("imodal"),ii=document.getElementById("iimg"),ix=document.getElementById("iclose");
 document.querySelectorAll(".card:not(.vcard)").forEach(function(c){c.addEventListener("click",function(e){e.preventDefault();var g=c.querySelector("img");if(!g)return;ii.src=g.src;im.classList.add("on");document.body.style.overflow="hidden"})});
 function closeI(){im.classList.remove("on");ii.src="";document.body.style.overflow=""}
 ix.addEventListener("click",closeI);im.addEventListener("click",function(e){if(e.target===im)closeI()});addEventListener("keydown",function(e){if(e.key==="Escape")closeI()});
